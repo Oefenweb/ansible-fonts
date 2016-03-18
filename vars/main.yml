@@ -1,0 +1,4 @@
+# vars file for fonts
+---
+fonts_dependencies:
+  - fontconfig

@@ -1,0 +1,62 @@
+# tasks file for fonts
+---
+- name: install dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  with_items: "{{ fonts_dependencies }}"
+  tags:
+    - configuration
+    - fonts
+    - fonts-dependencies
+
+- name: create (font) directories
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ fonts_font_paths }}"
+  when: item.state is undefined or item.state == 'present'
+  notify: update font cache
+  tags:
+    - configuration
+    - fonts
+    - fonts-directories
+    - fonts-directories-create
+
+- name: remove (font) directories
+  file:
+    path: "{{ item.dest }}"
+    state: absent
+  with_items: "{{ fonts_font_paths }}"
+  when: item.state is defined and item.state == 'absent'
+  notify: update font cache
+  tags:
+    - configuration
+    - fonts
+    - fonts-directories
+    - fonts-directories-remove
+
+- name: synchronize (font) directories
+  synchronize:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    archive: true
+    delete: true
+    owner: false
+    group: false
+    rsync_opts:
+      - '--checksum'
+    rsync_path: "{{ fonts_rsync_path | default('rsync') }}"
+  with_items: "{{ fonts_font_paths }}"
+  when: item.state is undefined or item.state == 'present'
+  notify: update font cache
+  tags:
+    - configuration
+    - fonts
+    - fonts-directories
+    - fonts-directories-synchronize

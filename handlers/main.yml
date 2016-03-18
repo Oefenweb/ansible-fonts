@@ -1,0 +1,4 @@
+# handlers file for fonts
+---
+- name: update font cache
+  command: fc-cache -f -v
