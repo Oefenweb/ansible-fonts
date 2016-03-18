@@ -7,9 +7,9 @@
     - ../../
   vars:
     fonts_font_paths:
-      - src: ubuntu-font-family-0.83/
+      - src: /tmp/ubuntu-font-family-0.83/
         dest: /usr/share/fonts/truetype/ubuntu-font-family-0.83
 
-      - src: ubuntu-font-family-0.84/
+      - src: /tmp/ubuntu-font-family-0.84/
         dest: /usr/share/fonts/truetype/ubuntu-font-family-0.84
         state: absent

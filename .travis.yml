@@ -44,8 +44,8 @@ before_install:
   - sudo apt-get update -qq
 
   - >
-    wget http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip -O files/ubuntu-font-family-0.83.zip
-    && cd files
+    wget http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip -O /tmp/ubuntu-font-family-0.83.zip
+    && cd /tmp
     && unzip ubuntu-font-family-0.83.zip
     && chmod 0755 ubuntu-font-family-0.83
     && cd -
