@@ -43,6 +43,12 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
+  - >
+    wget http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip -O files/ubuntu-font-family-0.83.zip
+    && cd files
+    && unzip ubuntu-font-family-0.83.zip
+    && cd -
+
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --no-binary ansible ansible; else pip install --no-binary ansible ansible==$ANSIBLE_VERSION; fi
