@@ -47,6 +47,7 @@ before_install:
     wget http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip -O files/ubuntu-font-family-0.83.zip
     && cd files
     && unzip ubuntu-font-family-0.83.zip
+    && chmod 0755 ubuntu-font-family-0.83
     && cd -
 
 install:
