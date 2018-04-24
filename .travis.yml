@@ -41,14 +41,6 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
-  - >
-    true
-    && mkdir /tmp/ubuntu-font-family
-    && cd $_
-    && wget 'https://fonts.google.com/download?family=Ubuntu' -O ubuntu-font-family.zip
-    && unzip ubuntu-font-family.zip
-    && cd -
-
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi

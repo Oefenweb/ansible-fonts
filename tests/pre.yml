@@ -1,0 +1,22 @@
+# pre test file for fonts
+---
+- name: pre | install dependencies
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  with_items:
+    - wget
+    - unzip
+
+- name: pre | font | download
+  shell: >
+    true
+    && cd /tmp
+    && wget 'https://fonts.google.com/download?family=Ubuntu' -O ubuntu-font-family.zip
+    && unzip ubuntu-font-family.zip
+    && mkdir -p ubuntu-font-family
+    && mv *.ttf ubuntu-font-family/
+  args:
+    creates: /tmp/ubuntu-font-family.zip
