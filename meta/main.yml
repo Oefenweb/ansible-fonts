@@ -1,6 +1,7 @@
 # meta file for fonts
 ---
 galaxy_info:
+  role_name: fonts
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up fonts in Debian-like systems
@@ -12,10 +13,12 @@ galaxy_info:
         - precise
         - trusty
         - xenial
+        - bionic
     - name: Debian
       versions:
         - wheezy
         - jessie
+        - stretch
   galaxy_tags:
     - system
     - fonts
