@@ -77,7 +77,7 @@ before_install:
   - sudo apt-get update -qq
 
   - >
-    wget http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip -O /tmp/ubuntu-font-family-0.83.zip
+    wget https://assets.ubuntu.com/v1/0cef8205-ubuntu-font-family-0.83.zip -O /tmp/ubuntu-font-family-0.83.zip
     && cd /tmp
     && unzip ubuntu-font-family-0.83.zip
     && chmod 0755 ubuntu-font-family-0.83
