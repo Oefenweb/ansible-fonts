@@ -1,6 +1,7 @@
 ## fonts
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-fonts.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-fonts) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-fonts-blue.svg)](https://galaxy.ansible.com/Oefenweb/fonts)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-fonts.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-fonts)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-fonts-blue.svg)](https://galaxy.ansible.com/Oefenweb/fonts)
 
 Set up fonts in Debian-like systems.
 
