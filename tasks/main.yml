@@ -32,7 +32,9 @@
     path: "{{ item.dest }}"
     state: absent
   with_items: "{{ fonts_font_paths }}"
-  when: item.state is defined and item.state == 'absent'
+  when:
+    - item.state is defined
+    - item.state == 'absent'
   notify: update font cache
   tags:
     - configuration
