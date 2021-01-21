@@ -1,5 +1,10 @@
 # pre test file for snmpd
 ---
+- name: debug
+  debug:
+    msg: "{{ ansible_connection }}"
+  failed_when: true
+
 - name: install dependencies
   apt:
     name:
