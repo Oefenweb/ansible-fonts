@@ -1,0 +1,20 @@
+# pre test file for snmpd
+---
+- name: install dependencies
+  apt:
+    name:
+      - wget
+      - unzip
+    state: "{{ apt_install_state | default('latest') }}"
+
+- name: download font
+  shell: >
+    wget https://assets.ubuntu.com/v1/0cef8205-ubuntu-font-family-0.83.zip -O /tmp/ubuntu-font-family-0.83.zip
+    && cd /tmp
+    && unzip ubuntu-font-family-0.83.zip
+    && chmod 0755 ubuntu-font-family-0.83
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint

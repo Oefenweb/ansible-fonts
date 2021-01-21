@@ -3,13 +3,10 @@
 - hosts: localhost
   connection: local
   become: true
+  pre_tasks:
+    - name: include vars
+      include_vars: "{{ playbook_dir }}/vars/main.yml"
+    - name: include tasks
+      include: "{{ playbook_dir }}/tasks/pre.yml"
   roles:
     - ../../
-  vars:
-    fonts_font_paths:
-      - src: /tmp/ubuntu-font-family-0.83/
-        dest: /usr/share/fonts/truetype/ubuntu-font-family-0.83
-
-      - src: /tmp/ubuntu-font-family-0.84/
-        dest: /usr/share/fonts/truetype/ubuntu-font-family-0.84
-        state: absent

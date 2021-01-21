@@ -1,7 +1,6 @@
-# test file for fonts
 ---
-- hosts: all
-  remote_user: vagrant
+- name: Converge
+  hosts: all
   become: true
   pre_tasks:
     - name: include vars
@@ -9,4 +8,4 @@
     - name: include tasks
       include: "{{ playbook_dir }}/tasks/pre.yml"
   roles:
-    - ../../
+    - ../../../
