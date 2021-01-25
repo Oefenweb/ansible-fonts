@@ -1,9 +1,10 @@
-# pre test file for snmpd
+# pre test file for font
 ---
-- name: debug
-  debug:
-    msg: "{{ ansible_connection }}"
-  failed_when: true
+- name: set fact
+  command: >
+    echo "{{ ansible_connection }}"
+  register: _ansible_connection
+  changed_when: false
 
 - name: install dependencies
   apt:
@@ -11,18 +12,23 @@
       - wget
       - unzip
       - rsync
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
     state: "{{ apt_install_state | default('latest') }}"
+  when: _ansible_connection.stdout != 'ssh'
 
 - name: download font
   shell: >
     true
-    && cd /tmp
+    && cd {{ fonts_files_paths }}
     && wget 'https://fonts.google.com/download?family=Ubuntu' -O ubuntu-font-family.zip
-    && unzip ubuntu-font-family.zip
+    && unzip -u ubuntu-font-family.zip
     && mkdir -p ubuntu-font-family
     && mv *.ttf ubuntu-font-family/
   args:
-    creates: /tmp/ubuntu-font-family.zip
+    creates: "{{ fonts_files_paths }}/ubuntu-font-family.zip"
     warn: false
+  connection: local
+  become: false
   tags:
     - skip_ansible_lint

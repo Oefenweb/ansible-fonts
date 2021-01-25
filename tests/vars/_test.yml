@@ -1,0 +1,3 @@
+# vars file for fonts
+---
+fonts_files_paths: "{{ playbook_dir }}/../files"

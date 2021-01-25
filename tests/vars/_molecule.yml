@@ -1,9 +1,7 @@
 # vars file for fonts
 ---
+fonts_files_paths: "{{ playbook_dir }}/../../files"
 fonts_font_paths:
-  - src: "{{ fonts_files_paths }}/ubuntu-font-family/"
-    dest: /usr/share/fonts/truetype/ubuntu-font-family
-
   - src: "{{ fonts_files_paths }}/ubuntu-font-family-0.84/"
     dest: /usr/share/fonts/truetype/ubuntu-font-family-0.84
     state: absent
