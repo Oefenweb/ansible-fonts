@@ -28,3 +28,6 @@ ansible.cfg
 # Other files #
 ###############
 !empty
+
+files/ubuntu-font-family*
+files/UFL.txt

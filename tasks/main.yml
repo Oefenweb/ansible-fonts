@@ -32,7 +32,9 @@
     path: "{{ item.dest }}"
     state: absent
   with_items: "{{ fonts_font_paths }}"
-  when: item.state is defined and item.state == 'absent'
+  when:
+    - item.state is defined
+    - item.state == 'absent'
   notify: update font cache
   tags:
     - configuration
@@ -40,20 +42,38 @@
     - fonts-directories
     - fonts-directories-remove
 
-- name: synchronize (font) directories
-  synchronize:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    archive: true
-    delete: true
-    owner: false
-    group: false
-    rsync_opts:
-      - '--checksum'
-    rsync_path: "{{ fonts_rsync_path | default('rsync') }}"
-  with_items: "{{ fonts_font_paths }}"
-  when: item.state is undefined or item.state == 'present'
-  notify: update font cache
+- block:
+
+    - name: synchronize (font) directories (remote)
+      synchronize:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        archive: true
+        delete: true
+        owner: false
+        group: false
+        rsync_opts:
+          - '--checksum'
+        rsync_path: "{{ fonts_rsync_path | default('rsync') }}"
+      with_items: "{{ fonts_font_paths }}"
+      when:
+        - ansible_connection != 'local'
+        - item.state is undefined or item.state == 'present'
+      notify: update font cache
+
+    - name: synchronize (font) directories (local)
+      shell: >
+        {{ fonts_rsync_path | default('rsync') }} -ai --delete --no-owner --no-group --checksum {{ item.src }} {{ item.dest }}
+      args:
+        warn: false
+      register: _synchronize_font_directories
+      changed_when: _synchronize_font_directories.stdout_lines | length > 0
+      with_items: "{{ fonts_font_paths }}"
+      when:
+        - ansible_connection == 'local'
+        - (item.state is undefined or item.state == 'present')
+      notify: update font cache
+
   tags:
     - configuration
     - fonts
