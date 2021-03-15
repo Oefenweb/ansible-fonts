@@ -1,4 +1,4 @@
-# tasks file for fonts
+# tasks file
 ---
 - name: install dependencies
   apt:

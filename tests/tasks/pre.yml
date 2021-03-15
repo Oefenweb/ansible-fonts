@@ -1,4 +1,4 @@
-# pre test file for font
+# pre test file
 ---
 - name: set fact
   command: >

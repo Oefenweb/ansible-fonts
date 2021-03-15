@@ -1,4 +1,4 @@
-# test file for fonts
+# test file
 ---
 - hosts: localhost
   connection: local

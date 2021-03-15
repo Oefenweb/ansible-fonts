@@ -1,4 +1,4 @@
-# vars file for fonts
+# vars file
 ---
 fonts_font_paths:
   - src: "{{ fonts_files_paths }}/ubuntu-font-family/"

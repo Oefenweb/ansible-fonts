@@ -1,6 +1,7 @@
-# meta file for fonts
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: fonts
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
