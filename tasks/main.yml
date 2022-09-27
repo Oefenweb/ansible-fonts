@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: install dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ fonts_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -12,7 +12,7 @@
     - fonts-dependencies
 
 - name: create (font) directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.dest }}"
     state: directory
     owner: root
@@ -28,7 +28,7 @@
     - fonts-directories-create
 
 - name: remove (font) directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.dest }}"
     state: absent
   with_items: "{{ fonts_font_paths }}"
@@ -45,7 +45,7 @@
 - block:
 
     - name: synchronize (font) directories (remote)
-      synchronize:
+      ansible.builtin.synchronize:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         archive: true
@@ -63,7 +63,7 @@
       notify: update font cache
 
     - name: synchronize (font) directories (local)
-      shell: >
+      ansible.builtin.shell: >
         {{ fonts_rsync_path | default('rsync') }} -ai --delete --no-owner --no-group --exclude=.uuid --checksum {{ item.src }} {{ item.dest }}
       args:
         warn: false

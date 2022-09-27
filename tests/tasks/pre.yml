@@ -1,13 +1,13 @@
 # pre test file
 ---
 - name: set fact
-  command: >
+  ansible.builtin.command: >
     echo "{{ ansible_connection }}"
   register: _ansible_connection
   changed_when: false
 
 - name: install dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - wget
       - unzip
@@ -18,7 +18,7 @@
   when: _ansible_connection.stdout != 'ssh'
 
 - name: download font
-  shell: >
+  ansible.builtin.shell: >
     true
     && cd {{ fonts_files_paths }}
     && wget 'https://fonts.google.com/download?family=Ubuntu' -O ubuntu-font-family.zip
