@@ -1,5 +1,5 @@
 # handlers file
 ---
 - name: update font cache
-  command: >
+  ansible.builtin.command: >
     fc-cache -f -v
