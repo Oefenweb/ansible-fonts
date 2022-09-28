@@ -42,10 +42,16 @@
     - fonts-directories
     - fonts-directories-remove
 
-- block:
+- name: synchronize
+  tags:
+    - configuration
+    - fonts
+    - fonts-directories
+    - fonts-directories-synchronize
+  block:
 
     - name: synchronize (font) directories (remote)
-      ansible.builtin.synchronize:
+      ansible.posix.synchronize:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         archive: true
@@ -74,9 +80,3 @@
         - ansible_connection == 'local'
         - (item.state is undefined or item.state == 'present')
       notify: update font cache
-
-  tags:
-    - configuration
-    - fonts
-    - fonts-directories
-    - fonts-directories-synchronize
