@@ -17,7 +17,7 @@
     state: "{{ apt_install_state | default('latest') }}"
   when: _ansible_connection.stdout != 'ssh'
 
-- name: download font
+- name: download font  # noqa command-instead-of-module
   ansible.builtin.shell: >
     true
     && cd {{ fonts_files_paths }}
@@ -27,7 +27,6 @@
     && mv *.ttf ubuntu-font-family/
   args:
     creates: "{{ fonts_files_paths }}/ubuntu-font-family.zip"
-    warn: false
   connection: local
   become: false
   tags:

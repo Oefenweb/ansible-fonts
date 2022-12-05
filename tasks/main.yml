@@ -68,11 +68,9 @@
         - item.state is undefined or item.state == 'present'
       notify: update font cache
 
-    - name: synchronize (font) directories (local)
+    - name: synchronize (font) directories (local)  # noqa command-instead-of-module
       ansible.builtin.shell: >
         {{ fonts_rsync_path | default('rsync') }} -ai --delete --no-owner --no-group --exclude=.uuid --checksum {{ item.src }} {{ item.dest }}
-      args:
-        warn: false
       register: _synchronize_font_directories
       changed_when: _synchronize_font_directories.stdout_lines | length > 0
       with_items: "{{ fonts_font_paths }}"
