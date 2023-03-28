@@ -5,7 +5,7 @@
   pre_tasks:
     - name: include vars
       ansible.builtin.include_vars: "{{ playbook_dir }}/../../tests/vars/_molecule.yml"
-    # - name: include vars
-    #   ansible.builtin.include_vars: "{{ playbook_dir }}/../../tests/vars/main.yml"
+      # - name: include vars
+      #   ansible.builtin.include_vars: "{{ playbook_dir }}/../../tests/vars/main.yml"
   roles:
     - ../../../
