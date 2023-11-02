@@ -28,7 +28,7 @@ None
 ---
 - hosts: all
   roles:
-    - fonts
+    - oefenweb.fonts
 ```
 
 #### License
