@@ -17,7 +17,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   with_items: "{{ fonts_font_paths }}"
   when: item.state is undefined or item.state == 'present'
   notify: update font cache
